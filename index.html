@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>tanya-sosi</title>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="player">
+      <video class="player__video viewer" src="./media/afgan.mp4"></video>
+
+      <div class="player__controls">
+        <div class="progress">
+          <div class="progress__filled"></div>
+        </div>
+        <button class="player__button toggle" title="toggle play">▶</button>
+        <input
+          type="range"
+          name="volume"
+          class="player__slider"
+          min="0"
+          max="1"
+          step="0.05"
+          value="1"
+        />
+        <input
+          type="range"
+          name="playbackRate"
+          class="player__slider"
+          min="0.5"
+          max="2"
+          step="0.1"
+          value="1"
+        />
+        <button data-skip="-10" class="player__button">« 10s</button>
+        <button data-skip="25" class="player__button">25s »</button>
+        <button class="fullscreen">
+          <svg
+            width="10px"
+            height="10px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="style=linear">
+              <g id="fullscreen">
+                <path
+                  id="vector"
+                  d="M8 2H4C2.89543 2 2 2.89543 2 4V8"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  id="vector_2"
+                  d="M22 8L22 4C22 2.89543 21.1046 2 20 2H16"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  id="vector_3"
+                  d="M16 22L20 22C21.1046 22 22 21.1046 22 20L22 16"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  id="vector_4"
+                  d="M8 22L4 22C2.89543 22 2 21.1046 2 20V16"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
