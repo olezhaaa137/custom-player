@@ -44,12 +44,14 @@ function scrub(e) {
 }
 
 function changeToFullScreen() {
-  if (video.requestFullscreen) {
-    video
+  if (!document.fullscreenElement) {
+    player
       .requestFullscreen()
       .catch((err) =>
         console.error(`Error attempting fullscreen: ${err.message}`),
       );
+  } else {
+    document.exitFullscreen().catch((err) => console.error(`ошибка ебаная`));
   }
 }
 //hook up the event listeners
