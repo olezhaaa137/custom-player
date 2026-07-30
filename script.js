@@ -44,14 +44,10 @@ function scrub(e) {
 }
 
 function changeToFullScreen() {
-  if (!document.fullscreenElement) {
-    player
-      .requestFullscreen()
-      .catch((err) =>
-        console.error(`Error attempting fullscreen: ${err.message}`),
-      );
-  } else {
-    document.exitFullscreen().catch((err) => console.error(`ошибка ебаная`));
+  if(video.requestFullscreen) {
+    video.requestFullscreen().catch((err) => console.error(err));
+  }else if(video.webkitEnterFullscreen) {
+    video.webkitEnterFullscreen();
   }
 }
 //hook up the event listeners
@@ -76,5 +72,6 @@ let mousedown = false;
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => (mousedown = true));
 progress.addEventListener('mouseup', () => (mousedown = false));
+
 
 fullScreen.addEventListener('click', changeToFullScreen);
