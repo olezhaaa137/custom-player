@@ -44,13 +44,75 @@ function scrub(e) {
 }
 
 function changeToFullScreen() {
-  if(video.requestFullscreen) {
+  if (video.requestFullscreen) {
     video.requestFullscreen().catch((err) => console.error(err));
-  }else if(video.webkitEnterFullscreen) {
+  } else if (video.webkitEnterFullscreen) {
     video.webkitEnterFullscreen();
   }
 }
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    player.requestFullscreen().catch((err) => console.error(err));
+  } else {
+    document.exitFullscreen().catch((err) => console.error(err));
+  }
+}
+
+function toggleSound() {
+  video.volume = video.volume == 0 ? 1 : 0;
+  const volumeInput = player.querySelector('input[name="volume"]');
+  if (volumeInput) {
+    volumeInput.value = video.volume;
+  }
+}
+
+function increasePlaybackRate() {
+  const inputPlaybackRateElement = player.querySelector(
+    'input[name="playbackRate"]',
+  );
+  if (inputPlaybackRateElement) {
+    const currentRate = inputPlaybackRateElement.value;
+    const maxRate = inputPlaybackRateElement.max;
+    if (currentRate < maxRate) {
+      inputPlaybackRateElement.value = +currentRate + 0.1;
+      video.playbackRate = inputPlaybackRateElement.value;
+    }
+  }
+}
+
+function decreasePlaybackRate() {
+  const inputPlaybackRateElement = player.querySelector(
+    'input[name="playbackRate"]',
+  );
+  if (inputPlaybackRateElement) {
+    const currentRate = inputPlaybackRateElement.value;
+    const minRate = inputPlaybackRateElement.min;
+    if (currentRate > minRate) {
+      inputPlaybackRateElement.value = +currentRate - 0.1;
+      video.playbackRate = inputPlaybackRateElement.value;
+    }
+  }
+}
 //hook up the event listeners
+
+player.addEventListener('keydown', (e) => {
+  if (e.keyCode == '32') {
+    togglePlay();
+  }
+  if (e.keyCode == '77') {
+    toggleSound();
+  }
+  if (e.keyCode == '70') {
+    toggleFullScreen();
+  }
+  if (e.keyCode == '190') {
+    increasePlaybackRate();
+  }
+  if (e.keyCode == '188') {
+    decreasePlaybackRate();
+  }
+});
 
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
@@ -72,6 +134,5 @@ let mousedown = false;
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => (mousedown = true));
 progress.addEventListener('mouseup', () => (mousedown = false));
-
 
 fullScreen.addEventListener('click', changeToFullScreen);

@@ -29,6 +29,10 @@ body {
   overflow: hidden;
 }
 
+.player:focus {
+  outline: none;
+}
+
 .player:fullscreen {
   max-width: none;
   width: 100%;
